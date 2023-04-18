@@ -10,6 +10,7 @@ onScreenLetters.forEach(function (letter) {
     letter.addEventListener('click', function () {
         if (attemptedWord.length < 5) {
             attemptedWord.push(letter.innerHTML)
+            document.querySelector('.tile' + characterCounter).innerHTML = letter.innerHTML
             characterCounter++
             console.log(attemptedWord, characterCounter)
         }
@@ -23,6 +24,8 @@ function deleteLetter (e) {
     if (characterCounter > 0) {
         attemptedWord = attemptedWord.slice(0, attemptedWord.length - 1)
         characterCounter--
+        document.querySelector('.tile' + characterCounter).innerHTML = ''
+        // characterCounter--
         console.log(attemptedWord, characterCounter)
     }
 }
@@ -41,6 +44,7 @@ document.addEventListener('keyup', (event) => {
     if (attemptedWord.length < 5) {
         if (alphabet.includes(event.key)) {
             attemptedWord.push(event.key.toUpperCase())
+            document.querySelector('.tile' + characterCounter).innerHTML = event.key
             characterCounter++
             console.log(attemptedWord, characterCounter)
         }
