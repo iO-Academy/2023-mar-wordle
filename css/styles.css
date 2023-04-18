@@ -79,20 +79,17 @@ hr {
 }
 
 .keyboard {
-    /*height: 30%;*/
     width: 100%;
     position: fixed;
     bottom: 0;
 }
 
 .container {
-
     height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    /*height: 97vh;*/
     background: #FFFFFF;
 }
 
@@ -113,7 +110,6 @@ div[class*='line'] + div[class*='line'] {
     margin-top: 0.5rem;
     gap: 0.2rem;
 }
-
 
 .line3 {
     padding-bottom: 0.5rem;
