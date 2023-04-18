@@ -21,7 +21,7 @@ fetch('words.json')
     .then(words => {
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr) // Shuffle the array
-        const expectedWord = shuffledWords[0].toUpperCase() // Select the first word
+        const expectedWord = shuffledWords[0].toUpperCase().split("") // Select the first word
         console.log(`Expected Word: ${expectedWord}`)
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
