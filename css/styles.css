@@ -12,8 +12,8 @@
 .rules-header {
     display: flex;
     justify-content: center;
+    align-self: center;
 }
-
 
 .rules-title {
     margin-right: 1rem;
@@ -21,10 +21,6 @@
 
 .rules-heading {
     padding-left: 2.5rem;
-}
-
-.open, .close {
-    align-self: center;
 }
 
 ul {
@@ -39,7 +35,6 @@ ul {
 h1 {
     text-align: center;
 }
-
 
 hr {
     width: 80%;
