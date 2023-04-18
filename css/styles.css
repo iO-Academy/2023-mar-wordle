@@ -23,7 +23,7 @@ hr {
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
-    margin-bottom: 2rem;
+
 }
 
 .game span {
@@ -36,7 +36,7 @@ hr {
     border: 0.15rem solid #333333;
     border-radius: 0.5rem;
     gap: 0.2rem;
-    min-font-size: 1rem;
+    font-size: 1.8rem;
 }
 
 .row0, .row1, .row2,
@@ -48,9 +48,6 @@ hr {
 }
 
 @media only screen and (min-width: 700px) {
-    .game {
-        /*width: 20%;*/
-    }
 
     .game span {
         width: 4rem;
@@ -59,12 +56,15 @@ hr {
 }
 
 .keyboard {
-    position: fixed;
+    /*height: 30%;*/
     width: 100%;
+    position: fixed;
     bottom: 0;
 }
 
 .container {
+
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -92,11 +92,6 @@ div[class*='line'] + div[class*='line'] {
 }
 
 
-.line1,
-.line3 {
-    padding: 0 15px;
-}
-
 .line3 {
     padding-bottom: 0.5rem;
 }
@@ -107,13 +102,14 @@ div[class*='line'] + div[class*='line'] {
 
 div[class*='line'] button {
     color: #000000;
-    padding: 15px;
+    padding: 0.8rem;
     background: #CCCCCC;
     border: 0.15rem solid #333333;
-    border-radius: 12px;
+    border-radius: 0.5rem;
     width: 1.5rem;
     text-align: center;
 }
+
 
 div[class*='line'] button:hover {
     cursor: pointer
@@ -124,11 +120,39 @@ div[class*='line'] button:active {
 }
 
 .line3 button:first-of-type {
-    width: 75px;
-    padding: 10px 15px;
+    width: 4.5rem;
+    padding: 0;
 }
 
 .line3 button:last-of-type {
-    width: 60px;
-    padding: 10px 15px;
+    width: 2.5rem;
+    padding: 0;
+}
+
+    @media only screen and (min-width: 700px) {
+        div[class*='line'] button {
+            width: 3rem;
+        }
+
+        .line3 button:first-of-type {
+            width: 7rem;
+            padding: 0;
+        }
+
+        .line3 button:last-of-type {
+            width: 5rem;
+            padding: 0;
+        }
+    }
+
+        .correct {
+    background-color: #00CC00;
+}
+
+.incorrect {
+    background-color: #808080;
+}
+
+.gap {
+    height: 11rem;
 }
