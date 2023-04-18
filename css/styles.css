@@ -1,10 +1,19 @@
-body {
+.hidden {
+    display: none;
+    z-index: 1;
+}
+
+* {
+    font-family: 'Manrope', sans-serif;
+}
+
+.keyboard {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 97vh;
-    background: #00BCD4;
+    /*height: 97vh;*/
+    background: #FFFFFF;
 }
 
 button {
@@ -13,9 +22,9 @@ button {
     -ms-user-select: none;
     user-select: none;
 }
-.base {
+/*.base {
     border-radius: 10px;
-    background: #272B2C;
+    !*background: #272B2C;*!
     display: flex;
     width: 700px;
     height: auto;
@@ -23,7 +32,7 @@ button {
     padding: 30px 15px;
     font: 28px arial;
     box-shadow: 0px 40px 45px rgba(0, 0, 0, .4);
-}
+}*/
 
 div[class*='line'] {
     display: flex;
@@ -72,26 +81,6 @@ div[class*='line'] button:active {
 }
 
 .line3 button:last-of-type {
-    width: 35px;
+    width: 60px;
     padding: 10px 15px;
-}
-
-
-#arrow,
-#backspace,
-#smile,
-#mic {
-    fill: #71D4FE;
-    width: 35px;
-    height:35px;
-    -webkit-filter: drop-shadow(0px 2px 20px #71D4FE)
-    filter: drop-shadow(0px 2px 20px #71D4FE)
-}
-
-#arrow:hover,
-#backspace:hover,
-#smile:hover,
-#mic:hover {
-    -webkit-filter: drop-shadow(0px 2px 15px #71D4FE)
-    filter: drop-shadow(0px 2px 15px #71D4FE)
 }
