@@ -1,10 +1,12 @@
 body {
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     height: 97vh;
     background: #00BCD4;
 }
+
 button {
     -webkit-user-select: none;
     -moz-user-select: none;
