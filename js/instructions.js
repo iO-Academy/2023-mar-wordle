@@ -8,8 +8,10 @@ targetClose.addEventListener('click', addHiddenClass)
 
 function removeHiddenClass() {
     targetHidden.classList.remove('hidden')
+    targetRules.textContent = 'RULES'
 }
 
 function addHiddenClass() {
     targetInstructions.classList.add('hidden')
+    targetRules.textContent = 'RULES [+]'
 }
