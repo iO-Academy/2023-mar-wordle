@@ -1,5 +1,6 @@
 h1 {
     text-align: center;
+    font-size: 3rem;
 }
 
 hr {
@@ -26,6 +27,7 @@ hr {
     border-radius: 0.5rem;
     gap: 0.2rem;
     min-font-size: 1rem;
+    font-size: 1.5rem;
 }
 
 .row0, .row1, .row2,
@@ -45,4 +47,10 @@ hr {
         width: 4rem;
         height: 4rem;
     }
+
+    h1 {
+        text-align: center;
+        font-size: 5rem;
+    }
+
 }
