@@ -1,17 +1,15 @@
-const targetRules = document.querySelector('.rules')
-const targetHidden = document.querySelector('.hidden')
+const targetOpen = document.querySelector('.open')
 const targetClose = document.querySelector('.close')
-const targetInstructions = document.querySelector('.instructions')
+const targetInstructions = document.querySelector('.rules-text')
 
-targetRules.addEventListener('click', removeHiddenClass)
-targetClose.addEventListener('click', addHiddenClass)
+targetOpen.addEventListener('click', () => {
+    targetOpen.classList.toggle('hidden')
+    targetClose.classList.remove('hidden')
+    targetInstructions.classList.remove('hidden')
+})
 
-function removeHiddenClass() {
-    targetHidden.classList.remove('hidden')
-    targetRules.textContent = 'RULES'
-}
-
-function addHiddenClass() {
+targetClose.addEventListener('click', () => {
+    targetClose.classList.toggle('hidden')
+    targetOpen.classList.remove('hidden')
     targetInstructions.classList.add('hidden')
-    targetRules.textContent = 'RULES [+]'
-}
+})
