@@ -11,7 +11,7 @@
 .keyboard {
     position: fixed;
     width: 100%;
-    bottom: 0.5rem;
+    bottom: 0;
 }
 
 .container {
@@ -56,6 +56,10 @@ div[class*='line'] + div[class*='line'] {
 .line1,
 .line3 {
     padding: 0 15px;
+}
+
+.line3 {
+    padding-bottom: 0.5rem;
 }
 
 .line2 {
