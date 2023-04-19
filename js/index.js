@@ -13,13 +13,12 @@ function shuffle(array) {
     return array;
 }
 
-let expectedWord = []
 fetch('words.json')
     .then(response => response.json())
     .then(words => {
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
-        expectedWord = shuffledWords[0].toUpperCase().split("")
+        let expectedWord = shuffledWords[0].toUpperCase().split("")
         console.log(expectedWord)
         let attemptedWord = []
         let characterCounter = 0
