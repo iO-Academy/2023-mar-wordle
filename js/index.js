@@ -61,10 +61,10 @@ fetch('words.json')
         }
 
 // MAKE THE REAL KEYBOARD WORK
-        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
+        const characterSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
         document.addEventListener('keyup', (event) => {
             if (attemptedWord.length < 5) {
-                if (alphabet.includes(event.key)) {
+                if (characterSet.includes(event.key)) {
                     attemptedWord.push(event.key.toUpperCase())
                     document.querySelector('.tile' + characterCounter).innerHTML = event.key
                     characterCounter++
