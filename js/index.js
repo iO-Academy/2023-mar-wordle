@@ -63,7 +63,7 @@ fetch('words.json')
         }
 
 // MAKE THE REAL KEYBOARD WORK
-        const alphabet = 'abcdefghijklmnopqrstuvwxyz'
+        const alphabet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
         document.addEventListener('keyup', (event) => {
             if (attemptedWord.length < 5) {
                 if (alphabet.includes(event.key)) {
