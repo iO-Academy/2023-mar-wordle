@@ -43,7 +43,7 @@ fetch('words.json')
         targetBackspace.addEventListener('click', deleteLetter)
         targetEnter.addEventListener('click', enterPressed)
 
-        function deleteLetter (e) {
+        function deleteLetter () {
             if (characterCounter > 0) {
                 attemptedWord = attemptedWord.slice(0, attemptedWord.length - 1)
                 characterCounter--
