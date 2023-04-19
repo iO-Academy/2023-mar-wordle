@@ -1,15 +1,11 @@
-const targetOpen = document.querySelector('.open')
-const targetClose = document.querySelector('.close')
+const targetOpenInstructions = document.querySelector('.open')
+const targetCloseInstructions = document.querySelector('.close')
 const targetInstructions = document.querySelector('.rules-text')
+const targetRulesHeader = document.querySelector('.rules-header')
 
-targetOpen.addEventListener('click', () => {
-    targetOpen.classList.toggle('hidden')
-    targetClose.classList.remove('hidden')
-    targetInstructions.classList.remove('hidden')
-})
 
-targetClose.addEventListener('click', () => {
-    targetClose.classList.toggle('hidden')
-    targetOpen.classList.remove('hidden')
-    targetInstructions.classList.add('hidden')
+targetRulesHeader.addEventListener('click', () => {
+    targetOpenInstructions.classList.toggle('hidden')
+    targetCloseInstructions.classList.toggle('hidden')
+    targetInstructions.classList.toggle('hidden')
 })
