@@ -22,7 +22,8 @@ fetch('words.json')
         console.log(expectedWord)
         let attemptedWord = []
         let characterCounter = 0
-// let attemptCounter = 0 - useful later
+        let tryCounter = 0;
+        let attemptCounter = 0
 
 // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')
@@ -32,7 +33,7 @@ fetch('words.json')
             letter.addEventListener('click', function () {
                 if (attemptedWord.length < 5) {
                     attemptedWord.push(letter.innerHTML)
-                    document.querySelector('.tile' + characterCounter).innerHTML = letter.innerHTML
+                    document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = letter.innerHTML
                     characterCounter++
                     console.log(attemptedWord, characterCounter)
                 }
@@ -46,16 +47,42 @@ fetch('words.json')
             if (characterCounter > 0) {
                 attemptedWord = attemptedWord.slice(0, attemptedWord.length - 1)
                 characterCounter--
-                document.querySelector('.tile' + characterCounter).innerHTML = ''
-                // characterCounter--
+                document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = ''
                 console.log(attemptedWord, characterCounter)
             }
         }
 
         function enterPressed () {
             if (attemptedWord.length === 5) {
-                const result = checkWord(expectedWord,attemptedWord)
-                alert(result)
+                const result = checkWord(expectedWord, attemptedWord)
+                attemptCounter++
+                attemptedWord = []
+                characterCounter = 0
+                if (attemptCounter === 6 || result === 'Correct') {
+                    targetKeyboard.classList.toggle('hidden')
+                    if (result === 'Correct') {
+                        // EXPERIMENTING
+                        resultArea.classList.toggle('hidden')
+                        let plural = attemptCounter === 1 ? `${attemptCounter} try` : `${attemptCounter} tries`
+                        gameEndMessage.innerHTML = `Success yay. You did it in ${plural}.`
+                        // END OF EXPERIMENTING
+
+                       /* alert(result)  // will be changed by james/brent*/
+                    } else if (result === 'Incorrect' && attemptCounter === 6) {
+                        // EXPERIMENTING
+                        resultArea.classList.toggle('hidden')
+                        gameEndMessage.innerHTML = 'You suck. Try again?'
+                        retryButton.classList.toggle('hidden')
+                        // END OF EXPERIMENTING
+
+              /*      alert(result) // james/brent*/
+                }
+                else {
+                    // Dom will change this
+                }}
+            }
+            else {
+                console.log('enter 5 characters') // Dom will change this
             }
         }
 
@@ -65,17 +92,18 @@ fetch('words.json')
             if (attemptedWord.length < 5) {
                 if (characterSet.includes(event.key)) {
                     attemptedWord.push(event.key.toUpperCase())
-                    document.querySelector('.tile' + characterCounter).innerHTML = event.key
+                    document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = event.key
                     characterCounter++
                     console.log(attemptedWord, characterCounter)
                 }
             }
 
-            if (event.key == 'Backspace') {
+            if (event.key === 'Backspace') {
                 deleteLetter()
             }
 
-            if (event.key == 'Enter') {
+
+            if (event.key === 'Enter') {
                 enterPressed()
             }
         })
@@ -93,5 +121,38 @@ fetch('words.json')
             }
             return correctPositions === 5 ? 'Correct' : 'Incorrect'
         }
+
+
+        let resultArea = document.querySelector('.result')
+        let gameEndMessage = document.querySelector('.game-end-message')
+        let retryButton = document.querySelector('.retry-button')
+        let targetKeyboard = document.querySelector('.keyboard')
+
+        // Retry process
+        retryButton.addEventListener('click', () => {
+            attemptCounter = 0
+            tryCounter++
+            expectedWord = shuffledWords[tryCounter]
+            document.querySelectorAll('.game > * > span').innerHTML = ''
+            targetKeyboard.classList.remove('hidden')
+            resultArea.classList.add('hidden')
+        })
+
+
+        // Below has been integrated into line 61 through 75
+   /*     function resultMessage(result) {
+            if (attemptCounter === 6 || result === 'Correct') {
+                targetKeyboard.classList.toggle('hidden')
+                if (result === 'Correct') {
+                    resultArea.classList.toggle('hidden')
+                    gameEndMessage.innerHTML = `Success yay. You did it in ${attemptCounter} tries.`
+                } else {
+                    resultArea.classList.toggle('hidden')
+                    gameEndMessage.innerHTML = 'You suck. Try again?'
+                    retryButton.classList.toggle('hidden')
+                }
+            }
+        }*/
+
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
