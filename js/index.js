@@ -24,6 +24,7 @@ fetch('words.json')
         let attemptedWord = []
         let characterCounter = 0
 // let attemptCounter = 0 - useful later
+        let tryCounter = 0;
 
 // MAKE ON SCREEN LETTERS WORK
         const onScreenLetters = document.querySelectorAll('.key')
@@ -98,5 +99,16 @@ fetch('words.json')
             }
             return correctPositions === 5 ? 'Correct' : 'Incorrect'
         }
+
+        const retryButton = document.querySelector('.retry-button')
+
+        retryButton.addEventListener('click', () => {
+            attemptCounter = 0
+            tryCounter++
+            expectedWord = shuffledWords[tryCounter]
+            document.querySelectorAll('.game > * > span').innerHTML = ''
+            gameEndMessage.classList.add('hidden')
+            targetKeyboard.classList.remove('hidden')
+        })
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
