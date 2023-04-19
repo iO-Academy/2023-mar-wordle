@@ -57,8 +57,6 @@ fetch('words.json')
             if (attemptedWord.length === 5) {
                 const result = checkWord(expectedWord,attemptedWord)
                 alert(result)
-            } else {
-                console.log('enter 5 characters')
             }
         }
 
