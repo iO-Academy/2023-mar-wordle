@@ -23,8 +23,12 @@ fetch('words.json')
         console.log(expectedWord)
         let attemptedWord = []
         let characterCounter = 0
+<<<<<<< HEAD
 // let attemptCounter = 0 - useful later
         let tryCounter = 0;
+=======
+        let attemptCounter = 0
+>>>>>>> f88364004ea7af2f3ff135a6393b504ffd2458f2
 
 // MAKE ON SCREEN LETTERS WORK
         const onScreenLetters = document.querySelectorAll('.key')
@@ -57,7 +61,8 @@ fetch('words.json')
         function enterPressed () {
             if (attemptedWord.length === 5) {
                 const result = checkWord(expectedWord,attemptedWord)
-                alert(result)
+                // alert(result)
+                resultMessage(result)
             } else {
                 console.log('enter 5 characters')
             }
@@ -80,6 +85,7 @@ fetch('words.json')
             }
 
             if (event.key == 'Enter') {
+                attemptCounter++
                 enterPressed()
             }
         })
@@ -100,6 +106,7 @@ fetch('words.json')
             return correctPositions === 5 ? 'Correct' : 'Incorrect'
         }
 
+
         const retryButton = document.querySelector('.retry-button')
 
         retryButton.addEventListener('click', () => {
@@ -110,5 +117,25 @@ fetch('words.json')
             gameEndMessage.classList.add('hidden')
             targetKeyboard.classList.remove('hidden')
         })
+
+
+        function resultMessage(result) {
+            let resultArea = document.querySelector('.result')
+            let gameEndMessage = document.querySelector('.game-end-message')
+            let retryButton = document.querySelector('.retry-button')
+            let targetKeyboard = document.querySelector('.keyboard')
+            if (attemptCounter === 6 || result === 'Correct') {
+                targetKeyboard.classList.toggle('hidden')
+                if (result === 'Correct') {
+                    resultArea.classList.toggle('hidden')
+                    gameEndMessage.innerHTML = `Success yay. You did it in ${attemptCounter} tries.`
+                } else {
+                    resultArea.classList.toggle('hidden')
+                    gameEndMessage.innerHTML = 'You suck. Try again?'
+                    retryButton.classList.toggle('hidden')
+                }
+            }
+        }
+
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
