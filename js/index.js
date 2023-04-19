@@ -87,7 +87,7 @@ fetch('words.json')
             let correctLetters = 0
             let correctPositions = 0
             for (let i=0; i < attemptedWord.length; i++) {
-                if (attemptedWord[i]===expectedWord[i]) {
+                if (attemptedWord[i] === expectedWord[i]) {
                     correctPositions++
                 }
                 if (expectedWord.includes(attemptedWord[i]) && attemptedWord[i] !== expectedWord[i]){
