@@ -59,23 +59,16 @@ fetch('words.json')
                 attemptedWord = []
                 characterCounter = 0
                 if (attemptCounter === 6 || result === 'Correct') {
-                    targetKeyboard.classList.toggle('hidden')
+                    targetKeyboard.classList.add('hidden')
                     if (result === 'Correct') {
-                        // EXPERIMENTING
-                        resultArea.classList.toggle('hidden')
+                        resultArea.classList.remove('hidden')
                         let plural = attemptCounter === 1 ? `${attemptCounter} try` : `${attemptCounter} tries`
                         gameEndMessage.innerHTML = `Success yay. You did it in ${plural}.`
-                        // END OF EXPERIMENTING
-
-                       /* alert(result)  // will be changed by james/brent*/
                     } else if (result === 'Incorrect' && attemptCounter === 6) {
-                        // EXPERIMENTING
-                        resultArea.classList.toggle('hidden')
+                        resultArea.classList.remove('hidden')
                         gameEndMessage.innerHTML = 'You suck. Try again?'
-                        retryButton.classList.toggle('hidden')
-                        // END OF EXPERIMENTING
+                        retryButton.classList.remove('hidden')
 
-              /*      alert(result) // james/brent*/
                 }
                 else {
                     // Dom will change this
@@ -132,27 +125,17 @@ fetch('words.json')
         retryButton.addEventListener('click', () => {
             attemptCounter = 0
             tryCounter++
-            expectedWord = shuffledWords[tryCounter]
-            document.querySelectorAll('.game > * > span').innerHTML = ''
+            expectedWord = shuffledWords[tryCounter].toUpperCase().split("")
+            const allTiles = document.querySelectorAll('.game > * > span')
+            allTiles.forEach(function (tiles) {
+                tiles.textContent = ''
+            })
             targetKeyboard.classList.remove('hidden')
             resultArea.classList.add('hidden')
+            retryButton.classList.add('hidden')
+            console.log(expectedWord)
         })
 
-
-        // Below has been integrated into line 61 through 75
-   /*     function resultMessage(result) {
-            if (attemptCounter === 6 || result === 'Correct') {
-                targetKeyboard.classList.toggle('hidden')
-                if (result === 'Correct') {
-                    resultArea.classList.toggle('hidden')
-                    gameEndMessage.innerHTML = `Success yay. You did it in ${attemptCounter} tries.`
-                } else {
-                    resultArea.classList.toggle('hidden')
-                    gameEndMessage.innerHTML = 'You suck. Try again?'
-                    retryButton.classList.toggle('hidden')
-                }
-            }
-        }*/
 
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
