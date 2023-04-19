@@ -89,6 +89,10 @@ hr {
     margin: 2rem;
 }
 
+.retry-button {
+    font-size: 1.5rem;
+}
+
 .container {
     height: 100%;
     display: flex;
