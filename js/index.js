@@ -1,3 +1,11 @@
+
+const gameState = {
+    attemptCounter: 0,
+    expectedWord: [],
+    characterCounter: 0,
+    tryCounter: 0
+}
+
 function shuffle(array) {
     let currentIndex = array.length, randomIndex;
 
@@ -18,11 +26,9 @@ fetch('words.json')
     .then(words => {
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
-        let expectedWord = shuffledWords[0].toUpperCase().split("")
-        console.log(expectedWord)
+        gameState.expectedWord = shuffledWords[0].toUpperCase().split("")
+        console.log(gameState.expectedWord)
         let attemptedWord = []
-        let characterCounter = 0
-// let attemptCounter = 0 - useful later
 
 // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')
@@ -32,9 +38,9 @@ fetch('words.json')
             letter.addEventListener('click', function () {
                 if (attemptedWord.length < 5) {
                     attemptedWord.push(letter.innerHTML)
-                    document.querySelector('.tile' + characterCounter).innerHTML = letter.innerHTML
-                    characterCounter++
-                    console.log(attemptedWord, characterCounter)
+                    document.querySelector('.tile' + gameState.characterCounter).innerHTML = letter.innerHTML
+                    gameState.characterCounter++
+                    console.log(attemptedWord, gameState.characterCounter)
                 }
             })
         })
@@ -43,18 +49,17 @@ fetch('words.json')
         targetEnter.addEventListener('click', enterPressed)
 
         function deleteLetter () {
-            if (characterCounter > 0) {
+            if (gameState.characterCounter > 0) {
                 attemptedWord = attemptedWord.slice(0, attemptedWord.length - 1)
-                characterCounter--
-                document.querySelector('.tile' + characterCounter).innerHTML = ''
-                // characterCounter--
-                console.log(attemptedWord, characterCounter)
+                gameState.characterCounter--
+                document.querySelector('.tile' + gameState.characterCounter).innerHTML = ''
+                console.log(attemptedWord, gameState.characterCounter)
             }
         }
 
         function enterPressed () {
             if (attemptedWord.length === 5) {
-                const result = checkWord(expectedWord,attemptedWord)
+                const result = checkWord(gameState.expectedWord,attemptedWord)
                 alert(result)
             }
         }
@@ -65,9 +70,9 @@ fetch('words.json')
             if (attemptedWord.length < 5) {
                 if (characterSet.includes(event.key)) {
                     attemptedWord.push(event.key.toUpperCase())
-                    document.querySelector('.tile' + characterCounter).innerHTML = event.key
-                    characterCounter++
-                    console.log(attemptedWord, characterCounter)
+                    document.querySelector('.tile' + gameState.characterCounter).innerHTML = event.key
+                    gameState.characterCounter++
+                    console.log(attemptedWord, gameState.characterCounter)
                 }
             }
 
