@@ -31,22 +31,20 @@
 <h1>I CAN'T BELIEVE IT'S NOT WORDLE</h1>
 <hr>
 
-<div>
-    <h2 class="rules">RULES</h2>
-    <div class="instructions hidden">
-        <h3>Guess the 5-letter word in 1 attempt.</h3>    		<!-- //    Guess the 5-letter word in 6 attempts. S4 change -->
+<div class="rules-container">
+    <div class="rules-header">
+        <h2 class="rules-title">RULES</h2>
+        <h2 class="open">[&nbsp;+&nbsp;]</h2>
+        <h2 class="close hidden">[&nbsp;-&nbsp;]</h2>
+    </div>
+    <div class="rules-text hidden">
+        <h3>Guess the 5-letter word in 1 attempt.</h3>
         <ul>
             <li>Input letters using either your device's keyboard or the onscreen keyboard.</li>
             <li>To check if your word is correct, hit enter.</li>
-            <li>If the background changes to <<example of colour>>, the word is correct, if it is <<<example>> it is incorrect.</li>
-
-
-<!--        //	<li>If you do not get the word in 6 attempts, you can <<reset>> the game.</li>  			//     S4 Change     S7 - add "after 60 minutes"-->
-<!--        //  <li>If the correct letter is in the correct space, it will turn green</li>-->
-<!--        //  <li>If the letter is in the word, but is not in the correct space, it will turn yellow</li>-->
-<!--        //  <li>If the letter does not appear in the word, it will turn <<colour>>.</li>-->
+            <li>If the boxes change to green, the word is correct, if they go dark grey it is incorrect.</li>
+            <li>There will be a message to confirm.</li>
         </ul>
-        <p class="close">[-] Close</p>
     </div>
 </div>
 
@@ -95,6 +93,7 @@
     </div>
 
 </div>
+<div class="gap"></div>
 
 
 <div class="keyboard">
