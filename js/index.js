@@ -80,8 +80,6 @@ fetch('words.json')
             }
         })
 
-        // console.log(attemptedWord)
-
         function checkWord(expectedWord,attemptedWord) {
             let correctLetters = 0
             let correctPositions = 0
