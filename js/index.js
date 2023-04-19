@@ -1,141 +1,151 @@
-function shuffle(array) {
-    let currentIndex = array.length, randomIndex;
-
-    while (currentIndex !== 0) {
-
-        randomIndex = Math.floor(Math.random() * currentIndex);
-        currentIndex--;
-
-        [array[currentIndex], array[randomIndex]] = [
-            array[randomIndex], array[currentIndex]];
-    }
-
-    return array;
+const gameState = {
+    attemptCounter: 0,
+    expectedWord: [],
+    attemptedWord: [],
+    characterCounter: 0,
+    tryCounter: 0,
+    success: false
 }
+
+function shuffle(array) {
+    let currentIndex = array.length, randomIndex
+    while (currentIndex !== 0) {
+        randomIndex = Math.floor(Math.random() * currentIndex)
+        currentIndex--
+        [array[currentIndex], array[randomIndex]] = [
+            array[randomIndex], array[currentIndex]]
+    }
+    return array
+}
+
+function deletePressed (gameState) {
+    if (gameState.characterCounter > 0) {
+        gameState.attemptedWord = gameState.attemptedWord.slice(0, gameState.attemptedWord.length - 1)
+        gameState.characterCounter--
+        document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = ''
+    }
+    //
+}
+
+function enterPressed (gameState) {
+    if (gameState.attemptedWord.length === 5) {
+        const result = checkWord(gameState)
+        gameState.attemptCounter++
+        gameState.attemptedWord = []
+        gameState.characterCounter = 0
+        console.log(gameState)
+        resultMessage(result)
+    }
+}
+
+function checkWord(gameState) {
+    let correctLetters = 0
+    let correctPositions = 0
+    for (let i = 0; i < gameState.attemptedWord.length; i++) {
+        if (gameState.attemptedWord[i] === gameState.expectedWord[i]) {
+            correctPositions++
+        }
+        if (gameState.expectedWord.includes(gameState.attemptedWord[i])
+            && gameState.attemptedWord[i] !== gameState.expectedWord[i]) {
+            correctLetters++
+        }
+    }
+    if (correctPositions === 5) {
+        gameState.success = true
+    }
+    return correctPositions === 5
+}
+
+function resultMessage(result) {
+    let resultArea = document.querySelector('.result')
+    let gameEndMessage = document.querySelector('.game-end-message')
+    let retryButton = document.querySelector('.retry-button')
+    let targetKeyboard = document.querySelector('.keyboard')
+
+    if (gameState.attemptCounter === 6 || result === true) {
+        targetKeyboard.classList.toggle('hidden')
+        if (result === true) {
+            resultArea.classList.toggle('hidden')
+            const plural = gameState.attemptCounter === 1 ? `${gameState.attemptCounter} try` : `${gameState.attemptCounter} tries`
+            gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
+        } else {
+            resultArea.classList.toggle('hidden')
+            gameEndMessage.textContent = 'You suck. Try again?'
+            retryButton.classList.toggle('hidden')
+        }
+    }
+}
+
+function tryAgain(e) {
+    const resultArea = document.querySelector('.result')
+    const retryButton = document.querySelector('.retry-button')
+    const targetKeyboard = document.querySelector('.keyboard')
+    const allTiles = document.querySelectorAll('.game > * > span')
+
+    // Retry process
+    gameState.attemptCounter = 0
+    gameState.tryCounter++
+    gameState.expectedWord = e[gameState.tryCounter].toUpperCase().split("")
+    allTiles.forEach(function (tiles) {
+        tiles.textContent = ''
+    })
+    targetKeyboard.classList.remove('hidden')
+    resultArea.classList.add('hidden')
+    retryButton.classList.add('hidden')
+    console.log(gameState.expectedWord)
+
+}
+
 
 fetch('words.json')
     .then(response => response.json())
     .then(words => {
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
-        let expectedWord = shuffledWords[0].toUpperCase().split("")
-        console.log(expectedWord)
-        let attemptedWord = []
-        let characterCounter = 0
-        let tryCounter = 0;
-        let attemptCounter = 0
+        gameState.expectedWord = shuffledWords[0].toUpperCase().split("")
+        console.log(gameState.expectedWord)
 
-// MAKE ON SCREEN LETTERS WORK
+        // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')
         const targetBackspace = document.querySelector('.backspace')
         const targetEnter = document.querySelector('.enter')
+        const retryButton = document.querySelector('.retry-button')
+
         targetOnScreenLetters.forEach(function (letter) {
             letter.addEventListener('click', function () {
-                if (attemptedWord.length < 5) {
-                    attemptedWord.push(letter.innerHTML)
-                    document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = letter.innerHTML
-                    characterCounter++
-                    console.log(attemptedWord, characterCounter)
+                if (gameState.attemptedWord.length < 5) {
+                    gameState.attemptedWord.push(letter.textContent)
+                    document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = letter.textContent
+                    gameState.characterCounter++
                 }
             })
         })
+        targetBackspace.addEventListener('click', function () {
+            deletePressed(gameState)
+        })
+        targetEnter.addEventListener('click', function () {
+            enterPressed(gameState)
+        })
 
-        targetBackspace.addEventListener('click', deleteLetter)
-        targetEnter.addEventListener('click', enterPressed)
+        // MAKE THE REAL KEYBOARD WORK
+        const characterSet = 'abcdefghijklmnopqrstuvwxyz'
 
-        function deleteLetter () {
-            if (characterCounter > 0) {
-                attemptedWord = attemptedWord.slice(0, attemptedWord.length - 1)
-                characterCounter--
-                document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = ''
-                console.log(attemptedWord, characterCounter)
-            }
-        }
-
-        function enterPressed () {
-            if (attemptedWord.length === 5) {
-                const result = checkWord(expectedWord, attemptedWord)
-                attemptCounter++
-                attemptedWord = []
-                characterCounter = 0
-                if (attemptCounter === 6 || result === 'Correct') {
-                    targetKeyboard.classList.add('hidden')
-                    if (result === 'Correct') {
-                        resultArea.classList.remove('hidden')
-                        let plural = attemptCounter === 1 ? `${attemptCounter} try` : `${attemptCounter} tries`
-                        gameEndMessage.innerHTML = `Success yay. You did it in ${plural}.`
-                    } else if (result === 'Incorrect' && attemptCounter === 6) {
-                        resultArea.classList.remove('hidden')
-                        gameEndMessage.innerHTML = 'You suck. Try again?'
-                        retryButton.classList.remove('hidden')
-
+        document.addEventListener('keyup', function (event) {
+            if (!gameState.success) {
+                if (characterSet.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < 5 ) {
+                    gameState.attemptedWord.push(event.key.toUpperCase())
+                    document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = event.key
+                    gameState.characterCounter++
+                } else if (event.key === 'Backspace') {
+                    deletePressed(gameState)
+                } else if (event.key === 'Enter') {
+                    enterPressed(gameState)
                 }
-                else {
-                    // Dom will change this
-                }}
-            }
-            else {
-                console.log('enter 5 characters') // Dom will change this
-            }
-        }
-
-// MAKE THE REAL KEYBOARD WORK
-        const characterSet = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ'
-        document.addEventListener('keyup', (event) => {
-            if (attemptedWord.length < 5) {
-                if (characterSet.includes(event.key)) {
-                    attemptedWord.push(event.key.toUpperCase())
-                    document.querySelector('.row' + attemptCounter + ' > .tile' + characterCounter).innerHTML = event.key
-                    characterCounter++
-                    console.log(attemptedWord, characterCounter)
-                }
-            }
-
-            if (event.key === 'Backspace') {
-                deleteLetter()
-            }
-
-
-            if (event.key === 'Enter') {
-                enterPressed()
             }
         })
 
-        function checkWord(expectedWord,attemptedWord) {
-            let correctLetters = 0
-            let correctPositions = 0
-            for (let i = 0; i < attemptedWord.length; i++) {
-                if (attemptedWord[i] === expectedWord[i]) {
-                    correctPositions++
-                }
-                if (expectedWord.includes(attemptedWord[i]) && attemptedWord[i] !== expectedWord[i]){
-                    correctLetters++
-                }
-            }
-            return correctPositions === 5 ? 'Correct' : 'Incorrect'
-        }
-
-
-        let resultArea = document.querySelector('.result')
-        let gameEndMessage = document.querySelector('.game-end-message')
-        let retryButton = document.querySelector('.retry-button')
-        let targetKeyboard = document.querySelector('.keyboard')
-
-        // Retry process
-        retryButton.addEventListener('click', () => {
-            attemptCounter = 0
-            tryCounter++
-            expectedWord = shuffledWords[tryCounter].toUpperCase().split("")
-            const allTiles = document.querySelectorAll('.game > * > span')
-            allTiles.forEach(function (tiles) {
-                tiles.textContent = ''
-            })
-            targetKeyboard.classList.remove('hidden')
-            resultArea.classList.add('hidden')
-            retryButton.classList.add('hidden')
-            console.log(expectedWord)
+        retryButton.addEventListener('click', function () {
+            tryAgain(shuffledWords)
         })
-
-
     })
     .catch(error => console.error(`An error occurred: ${error.message}`))
