@@ -26,10 +26,10 @@ fetch('words.json')
 // let attemptCounter = 0 - useful later
 
 // MAKE ON SCREEN LETTERS WORK
-        const onScreenLetters = document.querySelectorAll('.key')
-        const backspace = document.querySelector('.backspace')
-        const enter = document.querySelector('.enter')
-        onScreenLetters.forEach(function (letter) {
+        const targetOnScreenLetters = document.querySelectorAll('.key')
+        const targetBackspace = document.querySelector('.backspace')
+        const targetEnter = document.querySelector('.enter')
+        targetOnScreenLetters.forEach(function (letter) {
             letter.addEventListener('click', function () {
                 if (attemptedWord.length < 5) {
                     attemptedWord.push(letter.innerHTML)
@@ -40,8 +40,8 @@ fetch('words.json')
             })
         })
 
-        backspace.addEventListener('click', deleteLetter)
-        enter.addEventListener('click', enterPressed)
+        targetBackspace.addEventListener('click', deleteLetter)
+        targetEnter.addEventListener('click', enterPressed)
 
         function deleteLetter (e) {
             if (characterCounter > 0) {
