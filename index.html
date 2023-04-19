@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <title>I can't believe it's not wordle!</title>
+
+    <meta name="description" content="Our javascript game!">
+    <meta name="author" content="Demi Greyhounds">
+
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/styles.css">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&display=swap" rel="stylesheet">
+
+    <link rel="icon" href="images/favicon.png" sizes="192x192">
+    <link rel="shortcut icon" href="images/favicon.png">
+    <link rel="apple-touch-icon" href="images/favicon.png">
+
+    <script defer src="js/instructions.js"></script>
+    <script defer src="js/keyboard.js"></script>
+    <script defer src="js/importJson.js"></script>
+
+</head>
+
+<body>
+
+<h1>I CAN'T BELIEVE IT'S NOT WORDLE</h1>
+<hr>
+
+<div class="rules-container">
+    <div class="rules-header">
+        <h2 class="rules-title">RULES</h2>
+        <h2 class="open">[&nbsp;+&nbsp;]</h2>
+        <h2 class="close hidden">[&nbsp;-&nbsp;]</h2>
+    </div>
+    <div class="rules-text hidden">
+        <h3>Guess the 5-letter word in 1 attempt.</h3>
+        <ul>
+            <li>Input letters using either your device's keyboard or the onscreen keyboard.</li>
+            <li>To check if your word is correct, hit enter.</li>
+            <li>If the boxes change to green, the word is correct, if they go dark grey it is incorrect.</li>
+            <li>There will be a message to confirm.</li>
+        </ul>
+    </div>
+</div>
+
+<div class="game">
+    <div class="row0">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+    <div class="row1">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+    <div class="row2">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+    <div class="row3">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+    <div class="row4">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+    <div class="row5">
+        <span class="tile0"></span>
+        <span class="tile1"></span>
+        <span class="tile2"></span>
+        <span class="tile3"></span>
+        <span class="tile4"></span>
+    </div>
+
+</div>
+<div class="gap"></div>
+
+
+<div class="keyboard">
+    <div class="container">
+    <div class="line1">
+        <button class="key q">Q</button>
+        <button class="key w">W</button>
+        <button class="key e">E</button>
+        <button class="key r">R</button>
+        <button class="key t">T</button>
+        <button class="key y">Y</button>
+        <button class="key u">U</button>
+        <button class="key i">I</button>
+        <button class="key o">O</button>
+        <button class="key p">P</button>
+    </div>
+    <div class="line2">
+        <button class="key a">A</button>
+        <button class="key s">S</button>
+        <button class="key d">D</button>
+        <button class="key f">F</button>
+        <button class="key g">G</button>
+        <button class="key h">H</button>
+        <button class="key j">J</button>
+        <button class="key k">K</button>
+        <button class="key l">L</button>
+    </div>
+    <div class="line3">
+        <button class="enter">Enter</button>
+        <button class="key z">Z</button>
+        <button class="key x">X</button>
+        <button class="key c">C</button>
+        <button class="key v">V</button>
+        <button class="key b">B</button>
+        <button class="key n">N</button>
+        <button class="key m">M</button>
+        <button class="backspace">Del</button>
+    </div>
+    </div>
+</div>
+
+</body>
+</html>
