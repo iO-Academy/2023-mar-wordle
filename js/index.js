@@ -106,6 +106,7 @@ fetch('words.json')
         let retryButton = document.querySelector('.retry-button')
         let targetKeyboard = document.querySelector('.keyboard')
 
+        // Retry process
         retryButton.addEventListener('click', () => {
             attemptCounter = 0
             tryCounter++
@@ -114,7 +115,7 @@ fetch('words.json')
             targetKeyboard.classList.remove('hidden')
             resultArea.classList.add('hidden')
         })
-        
+
 
         function resultMessage(result) {
             if (attemptCounter === 6 || result === 'Correct') {
