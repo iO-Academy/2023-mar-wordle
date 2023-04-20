@@ -39,6 +39,7 @@ h1 {
 
 hr {
     width: 80%;
+    max-width: 40rem;
     border: 0.1rem solid #333333;
 }
 
