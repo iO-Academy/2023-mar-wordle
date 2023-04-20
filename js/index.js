@@ -161,7 +161,7 @@ function gameTileSelector(gameState) {
     return `.row${gameState.attemptCounter} .tile${gameState.characterCounter}`
 }
 
-if (Date.now() > JSON.parse(localStorage.endOfCountdown)) {
+if (!localStorage.endOfCountdown || Date.now() > JSON.parse(localStorage.endOfCountdown)) {
 
     fetch('words.json')
         .then(response => response.json())
