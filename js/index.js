@@ -68,7 +68,7 @@ console.log(expectedWordCopy, 'pre any loop')
             const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + k)
             if (expectedWordCopy[g] === gameState.attemptedWord[k]) {
             console.log(expectedWordCopy, g, gameState.attemptedWord ,k)
-            const onscreenKey = document.querySelector('.' + gameState.attemptedWord[g].toLowerCase())
+            const onscreenKey = document.querySelector('.' + gameState.attemptedWord[k].toLowerCase())
             // if (gameState.attemptedWord.includes(expectedWordCopy[g])) {
             // j = expectedWordCopy.lastIndexOf(gameState.attemptedWord[g]
             // console.log(j)
@@ -81,11 +81,13 @@ console.log(expectedWordCopy, 'pre any loop')
             // onscreenTile.classList.add('correct-letter')
         }
         }}
-
-        // for (let l = 0; l < 5; l++){
-        //     tile.classList.add('incorrect-letter')
-        //     // onscreenTitle.classList.add('incorrect-letter')
-        // }
+    // console.log('expected', expectedWordCopy, 'attempted', gameState.attemptedWord)
+    //     for (let l = 0; l < 5; l++){
+    //         if (expectedWordCopy[l] !== ' ') {
+    //             const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + l)
+    //             tile.classList.add('incorrect-letter')
+    //         }
+    //     }
         // console.log(j)
 // console.log(expectedWordCopy, 'after iteration ' + g)
 
