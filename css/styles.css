@@ -201,3 +201,14 @@ span.correct-position{
 .gap {
     height: 11rem;
 }
+
+@media only screen and (min-height: 800px) {
+    .gap {
+        display: none;
+    }
+
+    .keyboard {
+        position: inherit;
+        bottom: auto;
+    }
+}
