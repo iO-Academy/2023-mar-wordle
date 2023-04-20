@@ -18,10 +18,22 @@
 
 .rules-container h3 {
     padding-left: 2.5rem;
+    font-size: 1.2rem;
 }
 
 ul {
     font-size: 1.2rem;
+    list-style-type: circle;
+}
+
+.no-bullet {
+    list-style-type: none;
+    font-size: 1.1rem;
+}
+
+.no-bullet > h3 {
+    padding-left: unset;
+    margin: 0;
 }
 
 * {
@@ -35,6 +47,7 @@ h1 {
 
 hr {
     width: 80%;
+    max-width: 40rem;
     border: 0.1rem solid #333333;
 }
 
@@ -128,7 +141,7 @@ div[class*='line'] + div[class*='line'] {
     padding: 0 30px;
 }
 
-div[class*='line'] button {
+.keyboard button {
     color: #000000;
     padding: 0.8rem;
     background: #E0E0E0;
@@ -157,15 +170,15 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
-span.correct-letter {
-    background-color: #FC9F4D;
-}
-
-span.incorrect-letter {
+span.incorrect-letter, button.incorrect-letter {
     background-color: #A28B81;
 }
 
-span.correct-position{
+span.correct-letter, button.correct-letter {
+    background-color: #FC9F4D;
+}
+
+span.correct-position, button.correct-position{
     background-color: #7BA23F;
 }
 
@@ -190,14 +203,20 @@ span.correct-position{
     }
 }
 
-/*        .correct {*/
-/*    background-color: #00CC00;*/
-/*}*/
-
-/*.incorrect {*/
-/*    background-color: #808080;*/
-/*}*/
-
 .gap {
     height: 11rem;
+}
+
+@media only screen and (min-height: 800px) {
+    .gap {
+        display: none;
+    }
+
+    .keyboard {
+        position: inherit;
+    }
+
+    .result {
+        position: inherit;
+    }
 }
