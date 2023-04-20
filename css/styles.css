@@ -182,6 +182,30 @@ span.correct-position, button.correct-position{
     background-color: #7BA23F;
 }
 
+#green-font,
+#grey-font,
+#orange-font,
+.black {
+    display: inline-block;
+}
+
+#green-font {
+    color: #7BA23F; 
+}
+
+#grey-font {
+    color: #A28B81; 
+}
+
+#orange-font {
+    color: #FC9F4D; 
+}
+
+.blacken {
+    display: inline;
+    color: #000;
+}
+
 @media only screen and (min-width: 700px) {
     div[class*='line'] button {
         width: 3rem;
