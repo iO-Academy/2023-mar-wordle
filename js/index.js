@@ -184,7 +184,7 @@ if (!localStorage.endOfCountdown || Date.now() > JSON.parse(localStorage.endOfCo
             // Make keyboard work
             document.addEventListener('keyup', function (event) {
                 if (!gameState.success) {
-                    if (CHARACTER_SET.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < WORD_LENGTH ) {
+                    if (CHARACTER_SET.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < WORD_LENGTH && gameState.attemptCounter < 6) {
                         gameState.attemptedWord.push(event.key.toUpperCase())
                         document.querySelector(gameTileSelector(gameState)).textContent = event.key
                         gameState.characterCounter++
