@@ -18,13 +18,16 @@ function shuffle(array) {
     return array
 }
 
+function gameTileSelector (gameState) {
+    return `.row${gameState.attemptCounter} .tile${gameState.characterCounter}`
+}
+
 function deletePressed (gameState) {
     if (gameState.characterCounter > 0) {
         gameState.attemptedWord = gameState.attemptedWord.slice(0, gameState.attemptedWord.length - 1)
         gameState.characterCounter--
-        document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = ''
+        document.querySelector(gameTileSelector(gameState)).textContent = ''
     }
-    //
 }
 
 function enterPressed (gameState) {
@@ -33,7 +36,6 @@ function enterPressed (gameState) {
         gameState.attemptCounter++
         gameState.attemptedWord = []
         gameState.characterCounter = 0
-        console.log(gameState)
         resultMessage(result)
     }
 }
@@ -57,14 +59,14 @@ function checkWord(gameState) {
 }
 
 function resultMessage(result) {
-    let resultArea = document.querySelector('.result')
-    let gameEndMessage = document.querySelector('.game-end-message')
-    let retryButton = document.querySelector('.retry-button')
-    let targetKeyboard = document.querySelector('.keyboard')
+    const resultArea = document.querySelector('.result')
+    const gameEndMessage = document.querySelector('.game-end-message')
+    const retryButton = document.querySelector('.retry-button')
+    const targetKeyboard = document.querySelector('.keyboard')
 
-    if (gameState.attemptCounter === 6 || result === true) {
+    if (gameState.attemptCounter === 6 || result) {
         targetKeyboard.classList.toggle('hidden')
-        if (result === true) {
+        if (result) {
             resultArea.classList.toggle('hidden')
             const plural = gameState.attemptCounter === 1 ? `${gameState.attemptCounter} try` : `${gameState.attemptCounter} tries`
             gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
@@ -92,8 +94,6 @@ function tryAgain(e) {
     targetKeyboard.classList.remove('hidden')
     resultArea.classList.add('hidden')
     retryButton.classList.add('hidden')
-    console.log(gameState.expectedWord)
-
 }
 
 
@@ -103,7 +103,6 @@ fetch('words.json')
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
         gameState.expectedWord = shuffledWords[0].toUpperCase().split("")
-        console.log(gameState.expectedWord)
 
         // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')
@@ -115,7 +114,7 @@ fetch('words.json')
             letter.addEventListener('click', function () {
                 if (gameState.attemptedWord.length < 5) {
                     gameState.attemptedWord.push(letter.textContent)
-                    document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = letter.textContent
+                    document.querySelector(gameTileSelector(gameState)).textContent = letter.textContent
                     gameState.characterCounter++
                 }
             })
@@ -134,7 +133,7 @@ fetch('words.json')
             if (!gameState.success) {
                 if (characterSet.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < 5 ) {
                     gameState.attemptedWord.push(event.key.toUpperCase())
-                    document.querySelector(`.row${gameState.attemptCounter} .tile${gameState.characterCounter}`).textContent = event.key
+                    document.querySelector(gameTileSelector(gameState)).textContent = event.key
                     gameState.characterCounter++
                 } else if (event.key === 'Backspace') {
                     deletePressed(gameState)
