@@ -39,6 +39,7 @@ h1 {
 
 hr {
     width: 80%;
+    max-width: 40rem;
     border: 0.1rem solid #333333;
 }
 
@@ -54,7 +55,7 @@ hr {
     justify-content: center;
     width: 3rem;
     height: 3rem;
-    background-color: #CCCCCC;
+    background-color: #E0E0E0;
     border: 0.15rem solid #333333;
     border-radius: 0.5rem;
     font-size: 1.8rem;
@@ -128,10 +129,10 @@ div[class*='line'] + div[class*='line'] {
     padding: 0 30px;
 }
 
-div[class*='line'] button {
+.keyboard button {
     color: #000000;
     padding: 0.8rem;
-    background: #CCCCCC;
+    background: #E0E0E0;
     border: 0.15rem solid #333333;
     border-radius: 0.5rem;
     width: 1.5rem;
@@ -157,6 +158,18 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
+span.correct-letter, button.correct-letter {
+    background-color: #FC9F4D;
+}
+
+span.incorrect-letter, button.incorrect-letter {
+    background-color: #A28B81;
+}
+
+span.correct-position, button.correct-position{
+    background-color: #7BA23F;
+}
+
 @media only screen and (min-width: 700px) {
     div[class*='line'] button {
         width: 3rem;
@@ -178,14 +191,28 @@ div[class*='line'] button:active {
     }
 }
 
-        .correct {
-    background-color: #00CC00;
-}
+/*        .correct {*/
+/*    background-color: #00CC00;*/
+/*}*/
 
-.incorrect {
-    background-color: #808080;
-}
+/*.incorrect {*/
+/*    background-color: #808080;*/
+/*}*/
 
 .gap {
     height: 11rem;
+}
+
+@media only screen and (min-height: 800px) {
+    .gap {
+        display: none;
+    }
+
+    .keyboard {
+        position: inherit;
+    }
+
+    .result {
+        position: inherit;
+    }
 }

@@ -7,6 +7,11 @@ const gameState = {
     success: false
 }
 
+const WORD_LENGTH = 5
+const CORRECT_POSITION_CLASS = 'correct-position'
+const CORRECT_LETTER_CLASS = 'correct-letter'
+const INCORRECT_LETTER_CLASS = 'incorrect-letter'
+
 function shuffle(array) {
     let currentIndex = array.length, randomIndex
     while (currentIndex !== 0) {
@@ -31,31 +36,48 @@ function deletePressed (gameState) {
 }
 
 function enterPressed (gameState) {
-    if (gameState.attemptedWord.length === 5) {
-        const result = checkWord(gameState)
+    if (gameState.attemptedWord.length === WORD_LENGTH) {
+        checkWord(gameState)
         gameState.attemptCounter++
         gameState.attemptedWord = []
         gameState.characterCounter = 0
-        resultMessage(result)
+        resultMessage(gameState.success)
     }
 }
 
 function checkWord(gameState) {
     let correctLetters = 0
     let correctPositions = 0
-    for (let i = 0; i < gameState.attemptedWord.length; i++) {
-        if (gameState.attemptedWord[i] === gameState.expectedWord[i]) {
+    let expectedWordCopy = gameState.expectedWord.slice()
+
+    for (let i = 0; i < WORD_LENGTH; i++) {
+        const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + i)
+        if (gameState.attemptedWord[i] === expectedWordCopy[i]) {
             correctPositions++
-        }
-        if (gameState.expectedWord.includes(gameState.attemptedWord[i])
-            && gameState.attemptedWord[i] !== gameState.expectedWord[i]) {
-            correctLetters++
+            expectedWordCopy[i] = ' '
+            const onscreenKey = document.querySelector('.' + gameState.attemptedWord[i].toLowerCase())
+            gameState.attemptedWord[i] = '0'
+            tile.classList.add(CORRECT_POSITION_CLASS)
+            onscreenKey.classList.add(CORRECT_POSITION_CLASS)
         }
     }
-    if (correctPositions === 5) {
+
+    for (let g = 0; g < WORD_LENGTH; g++) {
+        for (let k = 0; k < WORD_LENGTH; k++) {
+            const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + k)
+            if (expectedWordCopy[g] === gameState.attemptedWord[k]) {
+                const onscreenKey = document.querySelector('.' + gameState.attemptedWord[k].toLowerCase())
+                correctLetters++
+                expectedWordCopy[g] = ' '
+                onscreenKey.classList.add(CORRECT_LETTER_CLASS)
+                tile.classList.add(CORRECT_LETTER_CLASS)
+            }
+        }
+    }
+
+    if (correctPositions === WORD_LENGTH) {
         gameState.success = true
     }
-    return correctPositions === 5
 }
 
 function resultMessage(result) {
@@ -72,7 +94,7 @@ function resultMessage(result) {
             gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
         } else {
             resultArea.classList.toggle('hidden')
-            gameEndMessage.textContent = 'You suck. Try again?'
+            gameEndMessage.textContent = 'Oops! you have run out of attempts.'
             retryButton.classList.toggle('hidden')
         }
     }
@@ -83,19 +105,24 @@ function tryAgain(e) {
     const retryButton = document.querySelector('.retry-button')
     const targetKeyboard = document.querySelector('.keyboard')
     const allTiles = document.querySelectorAll('.game > * > span')
+    const allKeys = document.querySelectorAll('.key')
 
     // Retry process
     gameState.attemptCounter = 0
     gameState.tryCounter++
     gameState.expectedWord = e[gameState.tryCounter].toUpperCase().split("")
+
     allTiles.forEach(function (tiles) {
         tiles.textContent = ''
+        tiles.classList.remove(CORRECT_LETTER_CLASS, CORRECT_POSITION_CLASS, INCORRECT_LETTER_CLASS)
+    })
+    allKeys.forEach(function (key) {
+        key.classList.remove(CORRECT_LETTER_CLASS, CORRECT_POSITION_CLASS, INCORRECT_LETTER_CLASS)
     })
     targetKeyboard.classList.remove('hidden')
     resultArea.classList.add('hidden')
     retryButton.classList.add('hidden')
 }
-
 
 fetch('words.json')
     .then(response => response.json())
@@ -103,7 +130,6 @@ fetch('words.json')
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
         gameState.expectedWord = shuffledWords[0].toUpperCase().split("")
-
         // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')
         const targetBackspace = document.querySelector('.backspace')
@@ -112,7 +138,7 @@ fetch('words.json')
 
         targetOnScreenLetters.forEach(function (letter) {
             letter.addEventListener('click', function () {
-                if (gameState.attemptedWord.length < 5) {
+                if (gameState.attemptedWord.length < WORD_LENGTH) {
                     gameState.attemptedWord.push(letter.textContent)
                     document.querySelector(gameTileSelector(gameState)).textContent = letter.textContent
                     gameState.characterCounter++
@@ -131,7 +157,7 @@ fetch('words.json')
 
         document.addEventListener('keyup', function (event) {
             if (!gameState.success) {
-                if (characterSet.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < 5 ) {
+                if (characterSet.includes(event.key.toLowerCase()) && gameState.attemptedWord.length < WORD_LENGTH ) {
                     gameState.attemptedWord.push(event.key.toUpperCase())
                     document.querySelector(gameTileSelector(gameState)).textContent = event.key
                     gameState.characterCounter++
