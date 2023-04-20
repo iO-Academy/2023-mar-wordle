@@ -158,15 +158,15 @@ div[class*='line'] button:active {
 }
 
 span.correct-letter {
-    background-color: orange;
+    background-color: #FC9F4D;
 }
 
 span.incorrect-letter {
-    background-color: darkgray;
+    background-color: #A28B81;
 }
 
 span.correct-position{
-    background-color: green;
+    background-color: #7BA23F;
 }
 
 @media only screen and (min-width: 700px) {
