@@ -43,7 +43,7 @@ console.log(gameState.expectedWord)
 function checkWord(gameState) {
     let correctLetters = 0
     let correctPositions = 0
-    // gameState.expectedWord = ['H','E','L','L','O']
+    gameState.expectedWord = ['H','E','L','L','O']
     console.log(gameState.expectedWord)
     let expectedWordCopy = gameState.expectedWord.slice()
 
@@ -62,6 +62,7 @@ function checkWord(gameState) {
             // gameState.attemptedWord.splice(i, 1)
             console.log(gameState.attemptedWord)
             console.log(expectedWordCopy)
+            console.log(gameState.expectedWord)
             tile.classList.add('correct-position')
         }
     }
@@ -70,8 +71,10 @@ function checkWord(gameState) {
         // onscreenTile.classList.add('correct-position')
         const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + g)
         if (expectedWordCopy.includes(gameState.attemptedWord[g])) {
+            j = expectedWordCopy.indexOf(gameState.attemptedWord[g])
             correctLetters++
-            expectedWordCopy[g] = ' '
+            expectedWordCopy[j] = ' '
+
             tile.classList.add('correct-letter')
             // onscreenTile.classList.add('correct-letter')
         } else{
