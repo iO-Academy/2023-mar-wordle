@@ -54,7 +54,7 @@ hr {
     justify-content: center;
     width: 3rem;
     height: 3rem;
-    background-color: #CCCCCC;
+    background-color: #E0E0E0;
     border: 0.15rem solid #333333;
     border-radius: 0.5rem;
     font-size: 1.8rem;
@@ -131,7 +131,7 @@ div[class*='line'] + div[class*='line'] {
 div[class*='line'] button {
     color: #000000;
     padding: 0.8rem;
-    background: #CCCCCC;
+    background: #E0E0E0;
     border: 0.15rem solid #333333;
     border-radius: 0.5rem;
     width: 1.5rem;
@@ -158,15 +158,15 @@ div[class*='line'] button:active {
 }
 
 span.correct-letter {
-    background-color: orange;
+    background-color: #FC9F4D;
 }
 
 span.incorrect-letter {
-    background-color: darkgray;
+    background-color: #A28B81;
 }
 
 span.correct-position{
-    background-color: green;
+    background-color: #7BA23F;
 }
 
 @media only screen and (min-width: 700px) {

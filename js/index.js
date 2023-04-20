@@ -39,18 +39,16 @@ function enterPressed (gameState) {
         resultMessage(result)
     }
 }
-
+console.log(gameState.expectedWord)
 function checkWord(gameState) {
     let correctLetters = 0
     let correctPositions = 0
-    gameState.expectedWord = ['H','E','L','L','O']
-    console.log(gameState.expectedWord)
+    gameState.expectedWord = ['E','N','T','E','R']
+    // console.log(gameState.expectedWord)
     let expectedWordCopy = gameState.expectedWord.slice()
-
+console.log(expectedWordCopy, 'pre any loop')
     for (let i = 0; i < 5; i++) {
-        console.log('iteration', i)
-        const tile = document.querySelector('.tile' + i)
-        console.log('tile', tile)
+        const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + i)
         // const onscreenTile = document.querySelector('.key' + gameState.attemptedWord[i])
 
 
@@ -58,28 +56,45 @@ function checkWord(gameState) {
             correctPositions++
             // expectedWordCopy.splice(i, 1)
             expectedWordCopy[i] = ' '
+            gameState.attemptedWord[i] = '0'
 
             // gameState.attemptedWord.splice(i, 1)
-            console.log(gameState.attemptedWord)
-            console.log(expectedWordCopy)
+            // console.log(gameState.attemptedWord)
+            // console.log(expectedWordCopy)
+            // console.log(gameState.expectedWord)
             tile.classList.add('correct-position')
         }
-    }
 
+    }
+    console.log(expectedWordCopy, 'post correct position loop')
     for (let g = 0; g < 5; g++) {
         // onscreenTile.classList.add('correct-position')
-        const tile = document.querySelector('.tile' + g)
-        if (expectedWordCopy.includes(gameState.attemptedWord[g])) {
+        // const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + g)
+        for (let k = 0; k < 5; k++) {
+            const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + k)
+
+        if (expectedWordCopy[g] === gameState.attemptedWord[k]) {
+            console.log(expectedWordCopy, g, gameState.attemptedWord ,k)
+            // if (gameState.attemptedWord.includes(expectedWordCopy[g])) {
+            // j = expectedWordCopy.lastIndexOf(gameState.attemptedWord[g])
+            //
+            // console.log(j)
             correctLetters++
             expectedWordCopy[g] = ' '
+            // console.log(expectedWordCopy, g, k)
+
             tile.classList.add('correct-letter')
             // onscreenTile.classList.add('correct-letter')
-        } else{
-            tile.classList.add('incorrect-letter')
-            // onscreenTitle.classList.add('incorrect-letter')
         }
+        }}
 
-    }
+        // for (let l = 0; l < 5; l++){
+        //     tile.classList.add('incorrect-letter')
+        //     // onscreenTitle.classList.add('incorrect-letter')
+        // }
+        // console.log(j)
+// console.log(expectedWordCopy, 'after iteration ' + g)
+
     if (correctPositions === 5) {
         gameState.success = true
     }
@@ -118,6 +133,9 @@ function tryAgain(e) {
     gameState.expectedWord = e[gameState.tryCounter].toUpperCase().split("")
     allTiles.forEach(function (tiles) {
         tiles.textContent = ''
+        tiles.classList.remove('correct-letter')
+        tiles.classList.remove('incorrect-letter')
+        tiles.classList.remove('correct-position')
     })
     targetKeyboard.classList.remove('hidden')
     resultArea.classList.add('hidden')
