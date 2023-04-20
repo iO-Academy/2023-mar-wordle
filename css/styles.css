@@ -158,12 +158,12 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
-span.correct-letter, button.correct-letter {
-    background-color: #FC9F4D;
-}
-
 span.incorrect-letter, button.incorrect-letter {
     background-color: #A28B81;
+}
+
+span.correct-letter, button.correct-letter {
+    background-color: #FC9F4D;
 }
 
 span.correct-position, button.correct-position{
