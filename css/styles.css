@@ -128,7 +128,7 @@ div[class*='line'] + div[class*='line'] {
     padding: 0 30px;
 }
 
-div[class*='line'] button {
+.keyboard button {
     color: #000000;
     padding: 0.8rem;
     background: #E0E0E0;
@@ -157,15 +157,15 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
-span.correct-letter {
+span.correct-letter, button.correct-letter {
     background-color: #FC9F4D;
 }
 
-span.incorrect-letter {
+span.incorrect-letter, button.incorrect-letter {
     background-color: #A28B81;
 }
 
-span.correct-position{
+span.correct-position, button.correct-position{
     background-color: #7BA23F;
 }
 

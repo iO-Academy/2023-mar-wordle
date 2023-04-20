@@ -50,19 +50,13 @@ console.log(expectedWordCopy, 'pre any loop')
     for (let i = 0; i < 5; i++) {
         const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + i)
         // const onscreenTile = document.querySelector('.key' + gameState.attemptedWord[i])
-
-
         if (gameState.attemptedWord[i] === expectedWordCopy[i]) {
             correctPositions++
-            // expectedWordCopy.splice(i, 1)
             expectedWordCopy[i] = ' '
+            const onscreenKey = document.querySelector('.' + gameState.attemptedWord[i].toLowerCase())
             gameState.attemptedWord[i] = '0'
-
-            // gameState.attemptedWord.splice(i, 1)
-            // console.log(gameState.attemptedWord)
-            // console.log(expectedWordCopy)
-            // console.log(gameState.expectedWord)
             tile.classList.add('correct-position')
+            onscreenKey.classList.add('correct-position')
         }
 
     }
@@ -72,15 +66,15 @@ console.log(expectedWordCopy, 'pre any loop')
         // const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + g)
         for (let k = 0; k < 5; k++) {
             const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + k)
-
-        if (expectedWordCopy[g] === gameState.attemptedWord[k]) {
+            if (expectedWordCopy[g] === gameState.attemptedWord[k]) {
             console.log(expectedWordCopy, g, gameState.attemptedWord ,k)
+            const onscreenKey = document.querySelector('.' + gameState.attemptedWord[g].toLowerCase())
             // if (gameState.attemptedWord.includes(expectedWordCopy[g])) {
-            // j = expectedWordCopy.lastIndexOf(gameState.attemptedWord[g])
-            //
+            // j = expectedWordCopy.lastIndexOf(gameState.attemptedWord[g]
             // console.log(j)
             correctLetters++
             expectedWordCopy[g] = ' '
+            onscreenKey.classList.add('correct-letter')
             // console.log(expectedWordCopy, g, k)
 
             tile.classList.add('correct-letter')
@@ -126,16 +120,23 @@ function tryAgain(e) {
     const retryButton = document.querySelector('.retry-button')
     const targetKeyboard = document.querySelector('.keyboard')
     const allTiles = document.querySelectorAll('.game > * > span')
+    const allKeys = document.querySelectorAll('.key')
 
     // Retry process
     gameState.attemptCounter = 0
     gameState.tryCounter++
     gameState.expectedWord = e[gameState.tryCounter].toUpperCase().split("")
+
     allTiles.forEach(function (tiles) {
         tiles.textContent = ''
         tiles.classList.remove('correct-letter')
         tiles.classList.remove('incorrect-letter')
         tiles.classList.remove('correct-position')
+    })
+    allKeys.forEach(function (key) {
+        key.classList.remove('correct-letter')
+        key.classList.remove('incorrect-letter')
+        key.classList.remove('correct-position')
     })
     targetKeyboard.classList.remove('hidden')
     resultArea.classList.add('hidden')
