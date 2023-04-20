@@ -39,6 +39,7 @@ h1 {
 
 hr {
     width: 80%;
+    max-width: 40rem;
     border: 0.1rem solid #333333;
 }
 
@@ -200,4 +201,15 @@ span.correct-position, button.correct-position{
 
 .gap {
     height: 11rem;
+}
+
+@media only screen and (min-height: 800px) {
+    .gap {
+        display: none;
+    }
+
+    .keyboard {
+        position: inherit;
+        bottom: auto;
+    }
 }
