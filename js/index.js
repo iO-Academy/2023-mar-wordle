@@ -28,23 +28,19 @@ function shuffle(array) {
 
 function startTimer() {
     let endCountdown = JSON.parse(localStorage.endOfCountdown)
-    console.log({endCountdown})
     countdownTimer()
-    let x = setInterval(countdownTimer, 1000)
+    let tick = setInterval(countdownTimer, 1000)
 
     function countdownTimer() {
-        // update to click event
-        let difference = endCountdown - Date.now()
-        console.log({difference})
-        let seconds = Math.ceil((difference % (1000 * 60)) / 1000)
-        let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
-        let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
-        document.getElementById("demo").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+        const difference = endCountdown - Date.now()
+        const seconds = Math.ceil((difference % (1000 * 60)) / 1000)
+        const minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        const hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        document.querySelector('.counter').innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
         if (difference < 0) {
             const retryButton = document.querySelector('.retry-button')
-
-            clearInterval(x);
-            document.getElementById("demo").innerHTML = "Try again..."; // update to retry button
+            clearInterval(tick);
+            document.querySelector('.counter').innerHTML = "Try again..."; // update to retry button
             retryButton.classList.remove('hidden')
         }
     }
@@ -176,7 +172,6 @@ if (!localStorage.endOfCountdown || Date.now() > JSON.parse(localStorage.endOfCo
             const targetBackspace = document.querySelector('.backspace')
             const targetEnter = document.querySelector('.enter')
             const retryButton = document.querySelector('.retry-button')
-            console.log(gameState.expectedWord)
             targetOnScreenLetters.forEach(function (letter) {
                 letter.addEventListener('click', function () {
                     if (gameState.attemptedWord.length < WORD_LENGTH) {
@@ -208,7 +203,6 @@ if (!localStorage.endOfCountdown || Date.now() > JSON.parse(localStorage.endOfCo
             })
             retryButton.addEventListener('click', function () {
                 location.reload()
-                // tryAgain(shuffledWords)
             })
         })
         .catch(error => console.error(`An error occurred: ${error.message}`))
@@ -226,7 +220,6 @@ if (!localStorage.endOfCountdown || Date.now() > JSON.parse(localStorage.endOfCo
     gameEndMessage.textContent = 'It is for your best...'
     retryButton.addEventListener('click', function () {
         location.reload()
-        // tryAgain(JSON.parse(localStorage.shuffledWords))
     })
 
     startTimer()
