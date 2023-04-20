@@ -6,10 +6,6 @@
     margin: 0 auto;
 }
 
-.hidden {
-    display: none;
-}
-
 .rules-header {
     display: flex;
     justify-content: center;
@@ -46,6 +42,10 @@ hr {
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
+}
+
+.hidden {
+    display: none;
 }
 
 .game span {
