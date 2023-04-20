@@ -51,7 +51,10 @@ function checkWord(gameState) {
     let expectedWordCopy = gameState.expectedWord.slice()
 
     for (let i = 0; i < WORD_LENGTH; i++) {
+        const onscreenKey = document.querySelector('.' + gameState.attemptedWord[i].toLowerCase())
+        onscreenKey.classList.add(INCORRECT_LETTER_CLASS)
         const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + i)
+        tile.classList.add(INCORRECT_LETTER_CLASS)
         if (gameState.attemptedWord[i] === expectedWordCopy[i]) {
             correctPositions++
             expectedWordCopy[i] = ' '

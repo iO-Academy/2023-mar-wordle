@@ -22,10 +22,22 @@
 
 .rules-container h3 {
     padding-left: 2.5rem;
+    font-size: 1.2rem;
 }
 
 ul {
     font-size: 1.2rem;
+    list-style-type: circle;
+}
+
+.no-bullet {
+    list-style-type: none;
+    font-size: 1.1rem;
+}
+
+.no-bullet > h3 {
+    padding-left: unset;
+    margin: 0;
 }
 
 * {
@@ -158,12 +170,12 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
-span.correct-letter, button.correct-letter {
-    background-color: #FC9F4D;
-}
-
 span.incorrect-letter, button.incorrect-letter {
     background-color: #A28B81;
+}
+
+span.correct-letter, button.correct-letter {
+    background-color: #FC9F4D;
 }
 
 span.correct-position, button.correct-position{
@@ -190,14 +202,6 @@ span.correct-position, button.correct-position{
         height: 4rem;
     }
 }
-
-/*        .correct {*/
-/*    background-color: #00CC00;*/
-/*}*/
-
-/*.incorrect {*/
-/*    background-color: #808080;*/
-/*}*/
 
 .gap {
     height: 11rem;
