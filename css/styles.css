@@ -210,6 +210,9 @@ span.correct-position, button.correct-position{
 
     .keyboard {
         position: inherit;
-        bottom: auto;
+    }
+
+    .result {
+        position: inherit;
     }
 }
