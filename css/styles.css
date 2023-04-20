@@ -201,11 +201,6 @@ span.correct-position, button.correct-position{
     color: #FC9F4D; 
 }
 
-.blacken {
-    display: inline;
-    color: #000;
-}
-
 @media only screen and (min-width: 700px) {
     div[class*='line'] button {
         width: 3rem;
