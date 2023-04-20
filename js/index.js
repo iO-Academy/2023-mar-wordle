@@ -61,7 +61,7 @@ console.log(expectedWordCopy, 'pre any loop')
             // gameState.attemptedWord.splice(i, 1)
             // console.log(gameState.attemptedWord)
             // console.log(expectedWordCopy)
-            // console.log(gameState.expectedWord)
+            console.log(gameState.expectedWord)
             tile.classList.add('correct-position')
         }
 
@@ -114,6 +114,7 @@ function resultMessage(result) {
             const plural = gameState.attemptCounter === 1 ? `${gameState.attemptCounter} try` : `${gameState.attemptCounter} tries`
             gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
             createTimestamp()
+            startTimer()
         } else {
             resultArea.classList.toggle('hidden')
             gameEndMessage.textContent = 'You suck. Try again?'
@@ -145,9 +146,37 @@ function tryAgain(e) {
 
 function createTimestamp() {
     let now = Date.now()
-    let endCountdown = now + 3600000
+    let endCountdown = now + 10000  //change to 3600000 for 1 hour
     localStorage.setItem('endOfCountdown', JSON.stringify(endCountdown))
 }
+
+//timer
+
+// localStorage.setItem('end', JSON.stringify(endCountdown))
+
+// Update the countdown every 1 second
+function startTimer() {
+    let endCountdown = JSON.parse(localStorage.endOfCountdown)
+    console.log(endCountdown)
+    let x = setInterval(countdownTimer, 1000)
+    function countdownTimer() {
+        // update to click event
+
+        let difference = endCountdown - Date.now()
+        let seconds = Math.floor((difference % (1000 * 60)) / 1000)
+        let minutes = Math.floor((difference % (1000 * 60 * 60)) / (1000 * 60))
+        let hours = Math.floor((difference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))
+        document.getElementById("demo").innerHTML = hours + "h " + minutes + "m " + seconds + "s ";
+        if (difference < 0) {
+            const retryButton = document.querySelector('.retry-button')
+
+            clearInterval(x);
+            document.getElementById("demo").innerHTML = "Try again..."; // update to retry button
+            retryButton.classList.remove('hidden')
+        }
+    }
+}
+
 
 fetch('words.json')
     .then(response => response.json())
