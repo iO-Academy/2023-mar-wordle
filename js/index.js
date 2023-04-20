@@ -70,6 +70,7 @@ function resultMessage(result) {
             resultArea.classList.toggle('hidden')
             const plural = gameState.attemptCounter === 1 ? `${gameState.attemptCounter} try` : `${gameState.attemptCounter} tries`
             gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
+            createTimestamp()
         } else {
             resultArea.classList.toggle('hidden')
             gameEndMessage.textContent = 'You suck. Try again?'
@@ -96,6 +97,11 @@ function tryAgain(e) {
     retryButton.classList.add('hidden')
 }
 
+function createTimestamp() {
+    let now = Date.now()
+    let endCountdown = now + 3600000
+    localStorage.setItem('endOfCountdown', JSON.stringify(endCountdown))
+}
 
 fetch('words.json')
     .then(response => response.json())
