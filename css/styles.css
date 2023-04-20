@@ -22,10 +22,22 @@
 
 .rules-container h3 {
     padding-left: 2.5rem;
+    font-size: 1.2rem;
 }
 
 ul {
     font-size: 1.2rem;
+    list-style-type: circle;
+}
+
+.no-bullet {
+    list-style-type: none;
+    font-size: 1.1rem;
+}
+
+.no-bullet > h3 {
+    padding-left: unset;
+    margin: 0;
 }
 
 * {
