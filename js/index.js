@@ -81,13 +81,15 @@ console.log(expectedWordCopy, 'pre any loop')
             // onscreenTile.classList.add('correct-letter')
         }
         }}
-    // console.log('expected', expectedWordCopy, 'attempted', gameState.attemptedWord)
-    //     for (let l = 0; l < 5; l++){
-    //         if (expectedWordCopy[l] !== ' ') {
-    //             const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + l)
-    //             tile.classList.add('incorrect-letter')
-    //         }
-    //     }
+    console.log('expected', expectedWordCopy, 'attempted', gameState.attemptedWord)
+        for (let l = 0; l < 5; l++){
+            if (!expectedWordCopy.includes(gameState.attemptedWord[l])) {
+                const tile = document.querySelector(`.row${gameState.attemptCounter}` + ' .tile' + l)
+                tile.classList.add('incorrect-letter')
+                // const onscreenKey = document.querySelector('.' + gameState.toLowerCase())
+                // onscreenKey.classList.add('incorrect-letter')
+            }
+        }
         // console.log(j)
 // console.log(expectedWordCopy, 'after iteration ' + g)
 
