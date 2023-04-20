@@ -35,17 +35,46 @@ function enterPressed (gameState) {
 function checkWord(gameState) {
     let correctLetters = 0
     let correctPositions = 0
-    for (let i = 0; i < gameState.attemptedWord.length; i++) {
-        if (gameState.attemptedWord[i] === gameState.expectedWord[i]) {
+    gameState.expectedWord = ['H','E','L','L','O']
+    console.log(gameState.expectedWord)
+    let expectedWordCopy = gameState.expectedWord.slice()
+
+    for (let i = 0; i < 5; i++) {
+        console.log('iteration', i)
+        const tile = document.querySelector('.tile' + i)
+        console.log('tile', tile)
+        // const onscreenTile = document.querySelector('.key' + gameState.attemptedWord[i])
+
+
+        if (gameState.attemptedWord[i] === expectedWordCopy[i]) {
             correctPositions++
-        }
-        if (gameState.expectedWord.includes(gameState.attemptedWord[i])
-            && gameState.attemptedWord[i] !== gameState.expectedWord[i]) {
-            correctLetters++
+            // expectedWordCopy.splice(i, 1)
+            expectedWordCopy[i] = ' '
+
+            // gameState.attemptedWord.splice(i, 1)
+            console.log(gameState.attemptedWord)
+            console.log(expectedWordCopy)
+            tile.classList.add('correct-position')
         }
     }
+    for (let g = 0; g < 5; g++) {
+        // onscreenTile.classList.add('correct-position')
+        const tile = document.querySelector('.tile' + g)
+        if (expectedWordCopy.includes(gameState.attemptedWord[g])) {
+            correctLetters++
+            expectedWordCopy[g] = ' '
+            tile.classList.add('correct-letter')
+            // onscreenTile.classList.add('correct-letter')
+        } else{
+            tile.classList.add('incorrect-letter')
+            // onscreenTitle.classList.add('incorrect-letter')
+        }
+
+    }
+
     return correctPositions === 5
 }
+
 
 fetch('words.json')
     .then(response => response.json())
@@ -53,7 +82,7 @@ fetch('words.json')
         const wordsArr = words['fiveLetterWords']
         const shuffledWords = shuffle(wordsArr)
         gameState.expectedWord = shuffledWords[0].toUpperCase().split("")
-        // console.log(gameState.expectedWord)
+        console.log(gameState.expectedWord)
 
         // MAKE ON SCREEN LETTERS WORK
         const targetOnScreenLetters = document.querySelectorAll('.key')

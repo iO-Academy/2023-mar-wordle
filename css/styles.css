@@ -138,6 +138,18 @@ div[class*='line'] button:active {
     padding: 0;
 }
 
+span.correct-letter {
+    background-color: orange;
+}
+
+span.incorrect-letter {
+    background-color: darkgray;
+}
+
+span.correct-position{
+    background-color: green;
+}
+
 @media only screen and (min-width: 700px) {
     div[class*='line'] button {
         width: 3rem;
@@ -159,13 +171,13 @@ div[class*='line'] button:active {
     }
 }
 
-        .correct {
-    background-color: #00CC00;
-}
+/*        .correct {*/
+/*    background-color: #00CC00;*/
+/*}*/
 
-.incorrect {
-    background-color: #808080;
-}
+/*.incorrect {*/
+/*    background-color: #808080;*/
+/*}*/
 
 .gap {
     height: 11rem;
