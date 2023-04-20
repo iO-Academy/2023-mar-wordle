@@ -121,6 +121,9 @@ function tryAgain(e) {
     gameState.expectedWord = e[gameState.tryCounter].toUpperCase().split("")
     allTiles.forEach(function (tiles) {
         tiles.textContent = ''
+        tiles.classList.remove('correct-letter')
+        tiles.classList.remove('incorrect-letter')
+        tiles.classList.remove('correct-position')
     })
     targetKeyboard.classList.remove('hidden')
     resultArea.classList.add('hidden')
