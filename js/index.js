@@ -94,7 +94,7 @@ function resultMessage(result) {
             gameEndMessage.textContent = `Success yay. You did it in ${plural}.`
         } else {
             resultArea.classList.toggle('hidden')
-            gameEndMessage.textContent = 'You suck. Try again?'
+            gameEndMessage.textContent = 'Oops! you have run out of attempts.'
             retryButton.classList.toggle('hidden')
         }
     }
