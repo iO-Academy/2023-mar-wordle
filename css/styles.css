@@ -184,9 +184,12 @@ span.correct-position, button.correct-position{
 
 #green-font,
 #grey-font,
-#orange-font,
-.black {
+#orange-font {
     display: inline-block;
+}
+
+.black {
+    display: inline;
 }
 
 #green-font {
