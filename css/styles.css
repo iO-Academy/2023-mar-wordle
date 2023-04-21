@@ -6,10 +6,6 @@
     margin: 0 auto;
 }
 
-.hidden {
-    display: none;
-}
-
 .rules-header {
     display: flex;
     justify-content: center;
@@ -59,6 +55,15 @@ hr {
     margin: 2rem auto;
     display: flex;
     flex-direction: column;
+}
+
+.counter {
+    font-size: 2rem;
+    font-weight: 800;
+}
+
+.hidden {
+    display: none;
 }
 
 .game span {
